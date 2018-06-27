@@ -1,0 +1,45 @@
+model Employee
+
+-- classes
+
+class Person 
+	attributes
+  		name : String
+  		age : Integer
+  		salary : Real
+	operations
+  		raiseSalary(rate : Real) : Real
+  		begin
+  			self.salary := self.salary * rate;
+  		end
+end
+
+class Company
+	attributes
+		name : String
+  		location : String
+	operations
+  		hire(p : Person, c : Contract)
+  		begin
+  			insert(p, c, self) into ContractWith;
+  		end
+  		fire(p : Person, c : Contract)
+		begin
+			delete (p, c, self) from ContractWith;
+		end
+end
+
+class Contract
+	attributes
+		jobTitle : String
+		salary : Real
+end
+
+-- associations
+
+association ContractWith between
+	Person[1] role employee
+	Contract[*] role contract
+	Company[1] role contractWith
+
+end

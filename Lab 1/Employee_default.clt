@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram_Layout version="13">
+  <diagramOptions>
+    <autolayout>false</autolayout>
+    <antialiasing>false</antialiasing>
+    <showassocnames>false</showassocnames>
+    <showattributes>true</showattributes>
+    <showmultiplicities>true</showmultiplicities>
+    <showoperations>false</showoperations>
+    <showrolenames>true</showrolenames>
+    <showgrid>false</showgrid>
+  </diagramOptions>
+  <node id="Company" sizeCalculated="true" type="Class">
+    <name>Company</name>
+    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+      <x>588.0</x>
+      <y>45.0</y>
+    </strategy>
+    <hidden>false</hidden>
+  </node>
+  <node id="Contract" sizeCalculated="true" type="Class">
+    <name>Contract</name>
+    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+      <x>186.0</x>
+      <y>22.0</y>
+    </strategy>
+    <hidden>false</hidden>
+  </node>
+  <node id="Person" sizeCalculated="true" type="Class">
+    <name>Person</name>
+    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+      <x>9.0</x>
+      <y>40.0</y>
+    </strategy>
+    <hidden>false</hidden>
+  </node>
+  <node height="20.0" id="ContractWith::DiamondNode" kind="association"
+    sizeCalculated="false" type="DiamondNode" width="40.0">
+    <name>ContractWith</name>
+    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+      <x>318.7670084635417</x>
+      <y>131.0</y>
+    </strategy>
+    <connectedNode>Company</connectedNode>
+    <connectedNode>Person</connectedNode>
+    <connectedNode>Contract</connectedNode>
+    <edgeproperty id="ContractWith::DiamondNode::AssociationName"
+      sizeCalculated="true" type="associationName" userDefined="false" visible="true">
+      <name>ContractWith</name>
+      <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToCorner">
+        <userOffsetX>0.0</userOffsetX>
+        <userOffsetY>0.0</userOffsetY>
+        <basisDeltaX>ABSOLUTE</basisDeltaX>
+        <deltaX>0.0</deltaX>
+        <maxDeltaX>1.7976931348623157E308</maxDeltaX>
+        <basisDeltaY>ABSOLUTE</basisDeltaY>
+        <deltaY>10.0</deltaY>
+        <maxDeltaY>1.7976931348623157E308</maxDeltaY>
+        <corner>NORTH</corner>
+        <relativeNodeId>ContractWith::DiamondNode</relativeNodeId>
+      </strategy>
+      <hidden>false</hidden>
+    </edgeproperty>
+    <edge type="HalfEdge">
+      <source>ContractWith</source>
+      <target>Person</target>
+      <name>employee</name>
+      <properties>
+        <edgeproperty id="ContractWith::employee::target::rolename"
+          sizeCalculated="true" type="rolename" userDefined="false" visible="true">
+          <name>employee</name>
+          <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+            <userOffsetX>0.0</userOffsetX>
+            <userOffsetY>0.0</userOffsetY>
+            <attached>ContractWith::employee::WayPoint::1</attached>
+            <offset_x>8</offset_x>
+            <offset_y>8</offset_y>
+            <placement>TOP</placement>
+          </strategy>
+          <hidden>false</hidden>
+        </edgeproperty>
+        <edgeproperty id="ContractWith::employee::target::multiplicity"
+          sizeCalculated="true" type="multiplicity" userDefined="false" visible="true">
+          <name>1</name>
+          <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+            <userOffsetX>0.0</userOffsetX>
+            <userOffsetY>0.0</userOffsetY>
+            <attached>ContractWith::employee::WayPoint::1</attached>
+            <offset_x>8</offset_x>
+            <offset_y>8</offset_y>
+            <placement>BOTTOM</placement>
+          </strategy>
+          <hidden>false</hidden>
+        </edgeproperty>
+      </properties>
+      <waypoints>
+        <edgeproperty id="ContractWith::employee::WayPoint::0"
+          sizeCalculated="true" type="WayPoint" userDefined="false" visible="true">
+          <name>0</name>
+          <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+            <userOffsetX>0.0</userOffsetX>
+            <userOffsetY>0.0</userOffsetY>
+          </strategy>
+          <id>0</id>
+          <specialid>1</specialid>
+          <hidden>false</hidden>
+        </edgeproperty>
+        <edgeproperty id="ContractWith::employee::WayPoint::1"
+          sizeCalculated="true" type="WayPoint" userDefined="false" visible="true">
+          <name>1</name>
+          <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+            <userOffsetX>0.0</userOffsetX>
+            <userOffsetY>0.0</userOffsetY>
+          </strategy>
+          <id>1</id>
+          <specialid>2</specialid>
+          <hidden>false</hidden>
+        </edgeproperty>
+      </waypoints>
+      <hidden>false</hidden>
+    </edge>
+    <edge type="HalfEdge">
+      <source>ContractWith</source>
+      <target>Contract</target>
+      <name>contract</name>
+      <properties>
+        <edgeproperty id="ContractWith::contract::target::multiplicity"
+          sizeCalculated="true" type="multiplicity" userDefined="false" visible="true">
+          <name>*</name>
+          <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+            <userOffsetX>0.0</userOffsetX>
+            <userOffsetY>0.0</userOffsetY>
+            <attached>ContractWith::contract::WayPoint::1</attached>
+            <offset_x>8</offset_x>
+            <offset_y>8</offset_y>
+            <placement>BOTTOM</placement>
+          </strategy>
+          <hidden>false</hidden>
+        </edgeproperty>
+        <edgeproperty id="ContractWith::contract::target::rolename"
+          sizeCalculated="true" type="rolename" userDefined="false" visible="true">
+          <name>contract</name>
+          <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+            <userOffsetX>0.0</userOffsetX>
+            <userOffsetY>0.0</userOffsetY>
+            <attached>ContractWith::contract::WayPoint::1</attached>
+            <offset_x>8</offset_x>
+            <offset_y>8</offset_y>
+            <placement>TOP</placement>
+          </strategy>
+          <hidden>false</hidden>
+        </edgeproperty>
+      </properties>
+      <waypoints>
+        <edgeproperty id="ContractWith::contract::WayPoint::0"
+          sizeCalculated="true" type="WayPoint" userDefined="false" visible="true">
+          <name>0</name>
+          <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+            <userOffsetX>0.0</userOffsetX>
+            <userOffsetY>0.0</userOffsetY>
+          </strategy>
+          <id>0</id>
+          <specialid>1</specialid>
+          <hidden>false</hidden>
+        </edgeproperty>
+        <edgeproperty id="ContractWith::contract::WayPoint::1"
+          sizeCalculated="true" type="WayPoint" userDefined="false" visible="true">
+          <name>1</name>
+          <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+            <userOffsetX>0.0</userOffsetX>
+            <userOffsetY>0.0</userOffsetY>
+          </strategy>
+          <id>1</id>
+          <specialid>2</specialid>
+          <hidden>false</hidden>
+        </edgeproperty>
+      </waypoints>
+      <hidden>false</hidden>
+    </edge>
+    <edge type="HalfEdge">
+      <source>ContractWith</source>
+      <target>Company</target>
+      <name>contractWith</name>
+      <properties>
+        <edgeproperty
+          id="ContractWith::contractWith::target::multiplicity"
+          sizeCalculated="true" type="multiplicity" userDefined="false" visible="true">
+          <name>1</name>
+          <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+            <userOffsetX>0.0</userOffsetX>
+            <userOffsetY>0.0</userOffsetY>
+            <attached>ContractWith::contractWith::WayPoint::1</attached>
+            <offset_x>8</offset_x>
+            <offset_y>8</offset_y>
+            <placement>BOTTOM</placement>
+          </strategy>
+          <hidden>false</hidden>
+        </edgeproperty>
+        <edgeproperty id="ContractWith::contractWith::target::rolename"
+          sizeCalculated="true" type="rolename" userDefined="false" visible="true">
+          <name>contractWith</name>
+          <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+            <userOffsetX>0.0</userOffsetX>
+            <userOffsetY>0.0</userOffsetY>
+            <attached>ContractWith::contractWith::WayPoint::1</attached>
+            <offset_x>8</offset_x>
+            <offset_y>8</offset_y>
+            <placement>TOP</placement>
+          </strategy>
+          <hidden>false</hidden>
+        </edgeproperty>
+      </properties>
+      <waypoints>
+        <edgeproperty id="ContractWith::contractWith::WayPoint::0"
+          sizeCalculated="true" type="WayPoint" userDefined="false" visible="true">
+          <name>0</name>
+          <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+            <userOffsetX>0.0</userOffsetX>
+            <userOffsetY>0.0</userOffsetY>
+          </strategy>
+          <id>0</id>
+          <specialid>1</specialid>
+          <hidden>false</hidden>
+        </edgeproperty>
+        <edgeproperty id="ContractWith::contractWith::WayPoint::1"
+          sizeCalculated="true" type="WayPoint" userDefined="false" visible="true">
+          <name>1</name>
+          <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+            <userOffsetX>0.0</userOffsetX>
+            <userOffsetY>0.0</userOffsetY>
+          </strategy>
+          <id>1</id>
+          <specialid>2</specialid>
+          <hidden>false</hidden>
+        </edgeproperty>
+      </waypoints>
+      <hidden>false</hidden>
+    </edge>
+    <hidden>false</hidden>
+  </node>
+</diagram_Layout>

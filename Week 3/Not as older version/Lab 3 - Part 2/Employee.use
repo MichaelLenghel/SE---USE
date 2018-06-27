@@ -1,0 +1,91 @@
+model Employee
+
+-- classes
+
+class Person
+	attributes
+		name : String
+		age : Integer
+		income : Real
+	operations
+		calcIncome(getSalary : Real) : Real
+		begin
+			self.income := 0;
+			self.income := self.income + getSalary;
+			result := self.income;
+		end
+end
+
+class Contract
+	attributes
+		title : String
+		salary : Real
+	operations
+		raiseSalary(rate : Real) : Real
+		begin
+			self.salary := self.salary + (self.salary * rate);
+		end
+end
+
+class Company
+	attributes
+		name : String
+		location : String
+	operations
+		--Part 3
+		hire (p : Person, c : Contract)
+		begin
+			--Part 2
+			c.salary := 20000;
+			insert(self, c) into IsAt;
+			insert(p, c) into WorksOn;
+			p.calcIncome(c.salary);
+		end
+		fire (p : Person, c : Contract)
+		begin
+			delete(self, c) from IsAt;
+			delete(p, c) from WorksOn;
+			p.calcIncome(-c.salary);
+		end
+		--setSalary(p : Person, c : Contract, s : Integer)
+		--begin
+		--	c.salary := s;
+		--	p.calcIncome(c.salary);
+		--end
+end
+
+-- associations
+
+association WorksOn between
+	Person[1] role person
+	Contract[*] role jobs
+end
+
+association IsAt between
+	Company[1] role company
+	Contract[1..*] role contracts
+end
+
+-- constraints
+
+constraints
+
+context Contract::raiseSalary (rate : Real) : Real
+	--Part 4
+	pre checkAge: person.age >= 21
+	post raiseSalaryPost:
+		salary = salary@pre * (1.0 + rate)
+	post resultPost:
+		result = salary
+
+context Company::hire (p : Person, c : Contract)
+	pre hirePre1: p.isDefined()
+	--pre hirePre2: employee->excludes(p)
+	--post hirePost: employee->includes(p)
+	--Part 2
+	post startSal: p.income >= 20000
+
+
+--context Company::fire(p : Person, c : Contract)
+
+

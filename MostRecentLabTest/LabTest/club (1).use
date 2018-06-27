@@ -1,0 +1,103 @@
+model Clubs_Teams
+
+class Club
+  attributes
+    budget : Integer
+    salaries : Integer init = 0
+  operations
+    addTeam(t : Team) 
+    hire(p : Player, t : Team, salaries : Integer)   
+end
+
+class Team
+  attributes
+    name : String
+    salaries : Integer init = 0
+  operations
+    addPlayer(p : Player)
+end
+
+
+class Person
+  attributes 
+    name : String
+    age : Integer
+  operations
+    setPay(x : Integer)
+end
+
+
+class Player < Person
+    attributes 
+      pay : Integer init = 0
+      goals : Integer init = 0
+    operations
+      setPay(x : Integer)
+      begin
+        self.pay := x
+      end
+end
+  
+class Manager < Person
+    operations
+    hire(p : String, t: String, salary : Integer)
+end
+
+association Manages between
+  Manager[1] role manager
+  Club[1] role club
+end
+
+association PlaysOn between
+  Team[1] role teams
+  Player[1..*] role players
+end
+ 
+association Owns between
+    Club[1]
+    Team[1..*] role teams
+end
+    
+
+constraints
+--Part 6 addPlayer constraints
+context Club::addTeam(t : Team) 
+  -- To create a team, must have a club exist
+  pre clubExists: self.isDefined()
+
+  -- New team must not be a part of a club already (Uniqueness)
+  pre notOwned: teams->excludes(t)
+  
+  -- New team was created succuessfully
+  post nowOwned: teams->includes(t)
+
+
+
+
+--Part 9 Contract for hire(p : Player, t : Team, salary : Integer)
+--If age < 21 pay max = 500
+--context Player::setPay(x: Integer)
+context Club::hire(p : Player,t : Team, salaries : Integer) 
+  pre youngBudget:  
+    if p.age < 21 then       
+      if self.salaries > 500 then
+        p.pay = 500
+      else
+        p.pay = self.salaries
+      endif
+    else
+      p.pay = self.salaries
+    endif
+
+  post salaryRight: Player.allInstances->forAll(p | p.pay = self.salaries)
+
+
+--Part 9 continued
+context Manager::hire(p : Player, t : Team, salary : Integer)
+  -- Team should be owned by a club already
+  pre isOwnedMan: club->includes(t) 
+  
+  -- Total of all salaries < club budget
+  pre inBudget: Player.allInstances->forAll(p | p.pay <= club.budget)
+
+  

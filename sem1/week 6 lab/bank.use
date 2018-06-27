@@ -1,0 +1,72 @@
+model BankSys
+
+class Person
+	attributes
+		name : String
+		age : Integer
+end
+
+class Employee < Person
+	attributes
+		salary : Real
+	operations
+		raiseSalary(rate : Real) : Real --The return value is after the colon
+		begin
+			self.salary := self.salary * (1.0 + rate);-- Assumes input will be a floating point number ratio to salary
+			result := self.salary;
+		end
+end
+
+class Manager < Person
+	operations
+		doHire(e : Employee)
+		begin
+			self.company.hire(e)
+		end
+
+		doFire(e: Employee)
+		begin
+			self.company.fire(e)
+		end
+end
+
+class Company
+	attributes
+		name : String
+		location : String
+		totalSalary : Real
+	operations
+		hire(p : Employee)
+		begin
+			insert(p, self) into WorksFor; -- self refers to company
+			p.salary := 20000.0
+		end
+		fire(p : Employee)
+		begin
+			--insert(p, self) into worksFor;
+			p.salary := 0
+		end
+		calcTotalSalary() : Real
+		begin
+			declare totSalary : Real;
+			totSalary := 0.0;
+			for e in self.employees do
+				totSalary := totSalary + e.salary --e stands for employee
+			end;
+			--Line that actually sets total salary
+			self.totalSalary := totSalary;
+			result := self.totalSalary --This line returns the value. result is the key word
+		end
+end
+
+--associations
+
+association WorksFor between
+	Employee[*] role employees
+	Company[0..1] role employer -- connection between company and employer
+end
+
+association Manages between
+	Manager[1]
+	Company[1]
+end

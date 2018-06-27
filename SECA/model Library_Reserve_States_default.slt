@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram_Layout version="13">
+  <diagramOptions>
+    <autolayout>false</autolayout>
+    <antialiasing>false</antialiasing>
+    <showassocnames>true</showassocnames>
+    <showattributes>false</showattributes>
+    <showmultiplicities>false</showmultiplicities>
+    <showoperations>false</showoperations>
+    <showrolenames>false</showrolenames>
+    <showgrid>false</showgrid>
+  </diagramOptions>
+  <node height="14.0" id="newReservation" sizeCalculated="false"
+    type="PseudoStateNode" width="14.0">
+    <name>newReservation</name>
+    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+      <x>53.437402324673826</x>
+      <y>45.795073139962284</y>
+    </strategy>
+    <node id="newReservation::StateName" sizeCalculated="true" type="StateName">
+      <name>newReservation</name>
+      <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToCorner">
+        <userOffsetX>0.0</userOffsetX>
+        <userOffsetY>0.0</userOffsetY>
+        <basisDeltaX>ABSOLUTE</basisDeltaX>
+        <deltaX>0.0</deltaX>
+        <maxDeltaX>1.7976931348623157E308</maxDeltaX>
+        <basisDeltaY>ABSOLUTE</basisDeltaY>
+        <deltaY>10.0</deltaY>
+        <maxDeltaY>1.7976931348623157E308</maxDeltaY>
+        <corner>NORTH</corner>
+        <relativeNodeId>newReservation</relativeNodeId>
+      </strategy>
+      <hidden>false</hidden>
+    </node>
+    <hidden>false</hidden>
+  </node>
+  <node id="availableToReserve" sizeCalculated="true" type="StateNode">
+    <name>availableToReserve</name>
+    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+      <x>153.48755659605217</x>
+      <y>69.0</y>
+    </strategy>
+    <showInvariant>true</showInvariant>
+    <hidden>false</hidden>
+  </node>
+  <node id="reserved" sizeCalculated="true" type="StateNode">
+    <name>reserved</name>
+    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+      <x>157.3949667099065</x>
+      <y>352.26149000373294</y>
+    </strategy>
+    <showInvariant>true</showInvariant>
+    <hidden>false</hidden>
+  </node>
+  <edge type="Transition">
+    <source>reserved</source>
+    <target>availableToReserve</target>
+    <name>cancelReservation(m : Member, c : Copy)/</name>
+    <waypoints>
+      <edgeproperty
+        id="transition::reserved::availableToReserve::::WayPoint::0"
+        sizeCalculated="true" type="WayPoint" userDefined="false" visible="true">
+        <name>0</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+          <userOffsetX>0.0</userOffsetX>
+          <userOffsetY>0.0</userOffsetY>
+        </strategy>
+        <id>0</id>
+        <specialid>1</specialid>
+        <hidden>false</hidden>
+      </edgeproperty>
+      <edgeproperty
+        id="transition::reserved::availableToReserve::::WayPoint::1"
+        sizeCalculated="true" type="WayPoint" userDefined="false" visible="true">
+        <name>1</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+          <userOffsetX>0.0</userOffsetX>
+          <userOffsetY>0.0</userOffsetY>
+        </strategy>
+        <id>1</id>
+        <specialid>2</specialid>
+        <hidden>false</hidden>
+      </edgeproperty>
+    </waypoints>
+    <hidden>false</hidden>
+    <Transitions>
+      <Transition>
+        <trigger>cancelReservation(m : Member, c : Copy)</trigger>
+        <guard/>
+        <post/>
+        <edgeproperty id="cancelReservation(m : Member, c : Copy)/"
+          sizeCalculated="true" type="TransitionLabel"
+          userDefined="true" visible="true">
+          <name>cancelReservation(m : Member, c : Copy)/</name>
+          <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+            <userOffsetX>118.0</userOffsetX>
+            <userOffsetY>-3.0</userOffsetY>
+            <offsetX>0.0</offsetX>
+            <offsetY>10.0</offsetY>
+            <related length="2">
+              <related0>transition::reserved::availableToReserve::::WayPoint::0</related0>
+              <related1>transition::reserved::availableToReserve::::WayPoint::1</related1>
+            </related>
+          </strategy>
+          <hidden>false</hidden>
+        </edgeproperty>
+      </Transition>
+    </Transitions>
+  </edge>
+  <edge type="Transition">
+    <source>newReservation</source>
+    <target>availableToReserve</target>
+    <name>create/</name>
+    <waypoints>
+      <edgeproperty
+        id="transition::newReservation::availableToReserve::::WayPoint::0"
+        sizeCalculated="true" type="WayPoint" userDefined="false" visible="true">
+        <name>0</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+          <userOffsetX>0.0</userOffsetX>
+          <userOffsetY>0.0</userOffsetY>
+        </strategy>
+        <id>0</id>
+        <specialid>1</specialid>
+        <hidden>false</hidden>
+      </edgeproperty>
+      <edgeproperty
+        id="transition::newReservation::availableToReserve::::WayPoint::1"
+        sizeCalculated="true" type="WayPoint" userDefined="false" visible="true">
+        <name>1</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+          <userOffsetX>0.0</userOffsetX>
+          <userOffsetY>0.0</userOffsetY>
+        </strategy>
+        <id>1</id>
+        <specialid>2</specialid>
+        <hidden>false</hidden>
+      </edgeproperty>
+    </waypoints>
+    <hidden>false</hidden>
+    <Transitions>
+      <Transition>
+        <trigger>create</trigger>
+        <guard/>
+        <post/>
+        <edgeproperty id="create/" sizeCalculated="true"
+          type="TransitionLabel" userDefined="true" visible="true">
+          <name>create/</name>
+          <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+            <userOffsetX>-19.0</userOffsetX>
+            <userOffsetY>-5.0</userOffsetY>
+            <offsetX>0.0</offsetX>
+            <offsetY>10.0</offsetY>
+            <related length="2">
+              <related0>transition::newReservation::availableToReserve::::WayPoint::0</related0>
+              <related1>transition::newReservation::availableToReserve::::WayPoint::1</related1>
+            </related>
+          </strategy>
+          <hidden>false</hidden>
+        </edgeproperty>
+      </Transition>
+    </Transitions>
+  </edge>
+  <edge type="Transition">
+    <source>availableToReserve</source>
+    <target>availableToReserve</target>
+    <name>borrowReserved(m : Member, c : Copy)/</name>
+    <waypoints>
+      <edgeproperty
+        id="transition::availableToReserve::availableToReserve::::WayPoint::0"
+        sizeCalculated="true" type="WayPoint" userDefined="false" visible="true">
+        <name>0</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToCorner">
+          <userOffsetX>0.0</userOffsetX>
+          <userOffsetY>0.0</userOffsetY>
+          <basisDeltaX>ABSOLUTE</basisDeltaX>
+          <deltaX>0.0</deltaX>
+          <maxDeltaX>0.0</maxDeltaX>
+          <basisDeltaY>RELATIVE</basisDeltaY>
+          <deltaY>-0.3333</deltaY>
+          <maxDeltaY>66.66</maxDeltaY>
+          <corner>NORTH_EAST</corner>
+          <relativeNodeId>availableToReserve</relativeNodeId>
+        </strategy>
+        <id>0</id>
+        <specialid>1</specialid>
+        <hidden>false</hidden>
+      </edgeproperty>
+      <edgeproperty
+        id="transition::availableToReserve::availableToReserve::::WayPoint::1"
+        sizeCalculated="true" type="WayPoint" userDefined="false" visible="false">
+        <name>1</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToCorner">
+          <userOffsetX>0.0</userOffsetX>
+          <userOffsetY>0.0</userOffsetY>
+          <basisDeltaX>RELATIVE</basisDeltaX>
+          <deltaX>0.6666</deltaX>
+          <maxDeltaX>133.32</maxDeltaX>
+          <basisDeltaY>RELATIVE</basisDeltaY>
+          <deltaY>-0.3333</deltaY>
+          <maxDeltaY>66.66</maxDeltaY>
+          <corner>NORTH_EAST</corner>
+          <relativeNodeId>availableToReserve</relativeNodeId>
+        </strategy>
+        <id>1</id>
+        <specialid>3</specialid>
+        <hidden>true</hidden>
+      </edgeproperty>
+      <edgeproperty
+        id="transition::availableToReserve::availableToReserve::::WayPoint::2"
+        sizeCalculated="true" type="WayPoint" userDefined="false" visible="false">
+        <name>2</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToCorner">
+          <userOffsetX>0.0</userOffsetX>
+          <userOffsetY>0.0</userOffsetY>
+          <basisDeltaX>RELATIVE</basisDeltaX>
+          <deltaX>0.6666</deltaX>
+          <maxDeltaX>133.32</maxDeltaX>
+          <basisDeltaY>RELATIVE</basisDeltaY>
+          <deltaY>0.6666</deltaY>
+          <maxDeltaY>133.32</maxDeltaY>
+          <corner>NORTH_EAST</corner>
+          <relativeNodeId>availableToReserve</relativeNodeId>
+        </strategy>
+        <id>2</id>
+        <specialid>4</specialid>
+        <hidden>true</hidden>
+      </edgeproperty>
+      <edgeproperty
+        id="transition::availableToReserve::availableToReserve::::WayPoint::3"
+        sizeCalculated="true" type="WayPoint" userDefined="false" visible="false">
+        <name>3</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToCorner">
+          <userOffsetX>0.0</userOffsetX>
+          <userOffsetY>0.0</userOffsetY>
+          <basisDeltaX>RELATIVE</basisDeltaX>
+          <deltaX>-0.3333</deltaX>
+          <maxDeltaX>66.66</maxDeltaX>
+          <basisDeltaY>RELATIVE</basisDeltaY>
+          <deltaY>0.6666</deltaY>
+          <maxDeltaY>133.32</maxDeltaY>
+          <corner>NORTH_EAST</corner>
+          <relativeNodeId>availableToReserve</relativeNodeId>
+        </strategy>
+        <id>3</id>
+        <specialid>5</specialid>
+        <hidden>true</hidden>
+      </edgeproperty>
+      <edgeproperty
+        id="transition::availableToReserve::availableToReserve::::WayPoint::4"
+        sizeCalculated="true" type="WayPoint" userDefined="false" visible="true">
+        <name>4</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToCorner">
+          <userOffsetX>0.0</userOffsetX>
+          <userOffsetY>0.0</userOffsetY>
+          <basisDeltaX>RELATIVE</basisDeltaX>
+          <deltaX>-0.3333</deltaX>
+          <maxDeltaX>66.66</maxDeltaX>
+          <basisDeltaY>ABSOLUTE</basisDeltaY>
+          <deltaY>0.0</deltaY>
+          <maxDeltaY>0.0</maxDeltaY>
+          <corner>NORTH_EAST</corner>
+          <relativeNodeId>availableToReserve</relativeNodeId>
+        </strategy>
+        <id>4</id>
+        <specialid>2</specialid>
+        <hidden>false</hidden>
+      </edgeproperty>
+    </waypoints>
+    <hidden>false</hidden>
+    <reflexivePosition>NORTH_EAST</reflexivePosition>
+    <Transitions>
+      <Transition>
+        <trigger>borrowReserved(m : Member, c : Copy)</trigger>
+        <guard/>
+        <post/>
+        <edgeproperty id="borrowReserved(m : Member, c : Copy)/"
+          sizeCalculated="true" type="TransitionLabel"
+          userDefined="true" visible="true">
+          <name>borrowReserved(m : Member, c : Copy)/</name>
+          <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+            <userOffsetX>42.0</userOffsetX>
+            <userOffsetY>-74.0</userOffsetY>
+            <offsetX>0.0</offsetX>
+            <offsetY>10.0</offsetY>
+            <related length="2">
+              <related0>transition::availableToReserve::availableToReserve::::WayPoint::0</related0>
+              <related1>transition::availableToReserve::availableToReserve::::WayPoint::4</related1>
+            </related>
+          </strategy>
+          <hidden>false</hidden>
+        </edgeproperty>
+      </Transition>
+    </Transitions>
+  </edge>
+  <edge type="Transition">
+    <source>availableToReserve</source>
+    <target>reserved</target>
+    <name>[(self.no_reserved = 0)] reserve(m : Member, c : Copy)/</name>
+    <waypoints>
+      <edgeproperty
+        id="transition::availableToReserve::reserved::::WayPoint::0"
+        sizeCalculated="true" type="WayPoint" userDefined="false" visible="true">
+        <name>0</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+          <userOffsetX>0.0</userOffsetX>
+          <userOffsetY>0.0</userOffsetY>
+        </strategy>
+        <id>0</id>
+        <specialid>1</specialid>
+        <hidden>false</hidden>
+      </edgeproperty>
+      <edgeproperty
+        id="transition::availableToReserve::reserved::::WayPoint::1"
+        sizeCalculated="true" type="WayPoint" userDefined="false" visible="true">
+        <name>1</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+          <userOffsetX>0.0</userOffsetX>
+          <userOffsetY>0.0</userOffsetY>
+        </strategy>
+        <id>1</id>
+        <specialid>2</specialid>
+        <hidden>false</hidden>
+      </edgeproperty>
+    </waypoints>
+    <hidden>false</hidden>
+    <Transitions>
+      <Transition>
+        <trigger>reserve(m : Member, c : Copy)</trigger>
+        <guard>(self.no_reserved = 0)</guard>
+        <post/>
+        <edgeproperty
+          id="[(self.no_reserved = 0)] reserve(m : Member, c : Copy)/"
+          sizeCalculated="true" type="TransitionLabel"
+          userDefined="true" visible="true">
+          <name>[(self.no_reserved = 0)] reserve(m : Member, c : Copy)/</name>
+          <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+            <userOffsetX>-57.0</userOffsetX>
+            <userOffsetY>-43.0</userOffsetY>
+            <offsetX>0.0</offsetX>
+            <offsetY>10.0</offsetY>
+            <related length="2">
+              <related0>transition::availableToReserve::reserved::::WayPoint::0</related0>
+              <related1>transition::availableToReserve::reserved::::WayPoint::1</related1>
+            </related>
+          </strategy>
+          <hidden>false</hidden>
+        </edgeproperty>
+      </Transition>
+    </Transitions>
+  </edge>
+  <edge type="Transition">
+    <source>reserved</source>
+    <target>availableToReserve</target>
+    <name>borrowReserved(m : Member, c : Copy)/</name>
+    <waypoints>
+      <edgeproperty
+        id="transition::reserved::availableToReserve::::WayPoint::0"
+        sizeCalculated="true" type="WayPoint" userDefined="false" visible="true">
+        <name>0</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+          <userOffsetX>0.0</userOffsetX>
+          <userOffsetY>0.0</userOffsetY>
+        </strategy>
+        <id>0</id>
+        <specialid>1</specialid>
+        <hidden>false</hidden>
+      </edgeproperty>
+      <edgeproperty
+        id="transition::reserved::availableToReserve::::WayPoint::1"
+        sizeCalculated="true" type="WayPoint" userDefined="false" visible="true">
+        <name>1</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+          <userOffsetX>0.0</userOffsetX>
+          <userOffsetY>0.0</userOffsetY>
+        </strategy>
+        <id>1</id>
+        <specialid>2</specialid>
+        <hidden>false</hidden>
+      </edgeproperty>
+    </waypoints>
+    <hidden>false</hidden>
+    <Transitions>
+      <Transition>
+        <trigger>borrowReserved(m : Member, c : Copy)</trigger>
+        <guard/>
+        <post/>
+        <edgeproperty id="borrowReserved(m : Member, c : Copy)/"
+          sizeCalculated="true" type="TransitionLabel"
+          userDefined="true" visible="true">
+          <name>borrowReserved(m : Member, c : Copy)/</name>
+          <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+            <userOffsetX>0.0</userOffsetX>
+            <userOffsetY>43.0</userOffsetY>
+            <offsetX>0.0</offsetX>
+            <offsetY>10.0</offsetY>
+            <related length="2">
+              <related0>transition::reserved::availableToReserve::::WayPoint::0</related0>
+              <related1>transition::reserved::availableToReserve::::WayPoint::1</related1>
+            </related>
+          </strategy>
+          <hidden>false</hidden>
+        </edgeproperty>
+      </Transition>
+    </Transitions>
+  </edge>
+  <edge type="Transition">
+    <source>availableToReserve</source>
+    <target>availableToReserve</target>
+    <name>cancelReservation(m : Member, c : Copy)/</name>
+    <waypoints>
+      <edgeproperty
+        id="transition::availableToReserve::availableToReserve::::WayPoint::0"
+        sizeCalculated="true" type="WayPoint" userDefined="false" visible="true">
+        <name>0</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToCorner">
+          <userOffsetX>0.0</userOffsetX>
+          <userOffsetY>0.0</userOffsetY>
+          <basisDeltaX>ABSOLUTE</basisDeltaX>
+          <deltaX>0.0</deltaX>
+          <maxDeltaX>0.0</maxDeltaX>
+          <basisDeltaY>RELATIVE</basisDeltaY>
+          <deltaY>-0.3333</deltaY>
+          <maxDeltaY>66.66</maxDeltaY>
+          <corner>SOUTH_EAST</corner>
+          <relativeNodeId>availableToReserve</relativeNodeId>
+        </strategy>
+        <id>0</id>
+        <specialid>1</specialid>
+        <hidden>false</hidden>
+      </edgeproperty>
+      <edgeproperty
+        id="transition::availableToReserve::availableToReserve::::WayPoint::1"
+        sizeCalculated="true" type="WayPoint" userDefined="false" visible="true">
+        <name>1</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToCorner">
+          <userOffsetX>0.0</userOffsetX>
+          <userOffsetY>0.0</userOffsetY>
+          <basisDeltaX>RELATIVE</basisDeltaX>
+          <deltaX>0.6666</deltaX>
+          <maxDeltaX>133.32</maxDeltaX>
+          <basisDeltaY>RELATIVE</basisDeltaY>
+          <deltaY>-0.3333</deltaY>
+          <maxDeltaY>66.66</maxDeltaY>
+          <corner>SOUTH_EAST</corner>
+          <relativeNodeId>availableToReserve</relativeNodeId>
+        </strategy>
+        <id>1</id>
+        <specialid>3</specialid>
+        <hidden>false</hidden>
+      </edgeproperty>
+      <edgeproperty
+        id="transition::availableToReserve::availableToReserve::::WayPoint::2"
+        sizeCalculated="true" type="WayPoint" userDefined="false" visible="true">
+        <name>2</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToCorner">
+          <userOffsetX>0.0</userOffsetX>
+          <userOffsetY>0.0</userOffsetY>
+          <basisDeltaX>RELATIVE</basisDeltaX>
+          <deltaX>0.6666</deltaX>
+          <maxDeltaX>133.32</maxDeltaX>
+          <basisDeltaY>RELATIVE</basisDeltaY>
+          <deltaY>0.6666</deltaY>
+          <maxDeltaY>133.32</maxDeltaY>
+          <corner>SOUTH_EAST</corner>
+          <relativeNodeId>availableToReserve</relativeNodeId>
+        </strategy>
+        <id>2</id>
+        <specialid>4</specialid>
+        <hidden>false</hidden>
+      </edgeproperty>
+      <edgeproperty
+        id="transition::availableToReserve::availableToReserve::::WayPoint::3"
+        sizeCalculated="true" type="WayPoint" userDefined="false" visible="true">
+        <name>3</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+          <x>291.0</x>
+          <y>172.0</y>
+        </strategy>
+        <id>3</id>
+        <specialid>0</specialid>
+        <hidden>false</hidden>
+      </edgeproperty>
+      <edgeproperty
+        id="transition::availableToReserve::availableToReserve::::WayPoint::4"
+        sizeCalculated="true" type="WayPoint" userDefined="true" visible="true">
+        <name>4</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToCorner">
+          <userOffsetX>1.0</userOffsetX>
+          <userOffsetY>3.0</userOffsetY>
+          <basisDeltaX>RELATIVE</basisDeltaX>
+          <deltaX>-0.3333</deltaX>
+          <maxDeltaX>66.66</maxDeltaX>
+          <basisDeltaY>RELATIVE</basisDeltaY>
+          <deltaY>0.6666</deltaY>
+          <maxDeltaY>133.32</maxDeltaY>
+          <corner>SOUTH_EAST</corner>
+          <relativeNodeId>availableToReserve</relativeNodeId>
+        </strategy>
+        <id>4</id>
+        <specialid>5</specialid>
+        <hidden>false</hidden>
+      </edgeproperty>
+      <edgeproperty
+        id="transition::availableToReserve::availableToReserve::::WayPoint::5"
+        sizeCalculated="true" type="WayPoint" userDefined="false" visible="true">
+        <name>5</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToCorner">
+          <userOffsetX>0.0</userOffsetX>
+          <userOffsetY>0.0</userOffsetY>
+          <basisDeltaX>RELATIVE</basisDeltaX>
+          <deltaX>-0.3333</deltaX>
+          <maxDeltaX>66.66</maxDeltaX>
+          <basisDeltaY>ABSOLUTE</basisDeltaY>
+          <deltaY>0.0</deltaY>
+          <maxDeltaY>0.0</maxDeltaY>
+          <corner>SOUTH_EAST</corner>
+          <relativeNodeId>availableToReserve</relativeNodeId>
+        </strategy>
+        <id>5</id>
+        <specialid>2</specialid>
+        <hidden>false</hidden>
+      </edgeproperty>
+    </waypoints>
+    <hidden>false</hidden>
+    <reflexivePosition>SOUTH_EAST</reflexivePosition>
+    <Transitions>
+      <Transition>
+        <trigger>cancelReservation(m : Member, c : Copy)</trigger>
+        <guard/>
+        <post/>
+        <edgeproperty id="cancelReservation(m : Member, c : Copy)/"
+          sizeCalculated="true" type="TransitionLabel"
+          userDefined="true" visible="true">
+          <name>cancelReservation(m : Member, c : Copy)/</name>
+          <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+            <userOffsetX>137.0</userOffsetX>
+            <userOffsetY>-32.0</userOffsetY>
+            <offsetX>0.0</offsetX>
+            <offsetY>10.0</offsetY>
+            <related length="2">
+              <related0>transition::availableToReserve::availableToReserve::::WayPoint::0</related0>
+              <related1>transition::availableToReserve::availableToReserve::::WayPoint::5</related1>
+            </related>
+          </strategy>
+          <hidden>false</hidden>
+        </edgeproperty>
+      </Transition>
+    </Transitions>
+  </edge>
+</diagram_Layout>

@@ -1,0 +1,92 @@
+model Employee
+
+-- classes
+
+class Person
+	attributes
+		name : String
+		age : Integer
+		income : Real
+	operations
+		calcIncome(getSalary : Real) : Real
+		begin
+			self.income := self.income + getSalary;
+			result := self.income
+		end
+end
+
+class Contract
+	attributes
+		title : String
+		salary : Real
+	operations
+		raiseSalary(rate : Real) : Real
+		begin
+			self.salary := self.salary + (self.salary * rate);
+		end
+end
+
+class Company
+	attributes
+		name : String
+		location : String
+	operations
+		hire (p : Person, c : Contract)
+		begin
+			-- a contract for a job can only exist if there is a job (intersection)
+			--if (self.contracts->intersection(p.jobs)->size() > 0)
+			then
+				--Part 3
+				--Insert contract into company
+				insert(self, c) into IsAt;
+				--Insert person into contract
+				insert(p, c) into WorksOn;
+				p.income := 20000;
+				p.calcIncome(c.salary);
+			end 
+		end
+		fire (p : Person, c : Contract)
+		begin
+			delete(self, c) from IsAt;
+			delete(p, c) from WorksOn;
+			p.income := 0;
+			p.calcIncome(c.salary);
+		end
+end
+
+-- associations
+
+association WorksOn between
+	Person[1] role person
+	Contract[*] role jobs
+end
+
+association IsAt between
+	Company[1] role company
+	Contract[1..*] role contracts
+end
+
+-- constraints
+
+constraints
+
+context Contract::raiseSalary (rate : Real) : Real
+	--Part 4
+	pre assertAge: person.age >= 21
+	post raiseSalaryPost:
+		salary = salary@pre * (1.0 + rate)
+	post resultPost:
+		result = salary
+
+context Company::hire (p : Person, c : Contract)
+	pre hirePre1: p.isDefined() and c.isDefined()
+	-- checks contract is not already part of the Company
+	pre hirePre: contracts->excludes(p)
+	--Part 2
+	pre startSal: p.income >= 20000
+	-- checks that contract was added to the Company
+	post hirePost: contracts->includes(p)
+
+context Company::fire (p : Person, c : Contract)
+	pre firePre: contracts->includes(p)
+	post firePost: contracts->excludes(p)

@@ -1,0 +1,224 @@
+model Library
+
+class Book
+	attributes
+		title : String
+		author : String
+		no_copies : Integer
+		no_onshelf : Integer
+	operations
+		borrow()
+		begin
+		 self.no_onshelf := self.no_onshelf - 1
+		end
+		pre copiesOnShelf: no_copies > 0
+		post: no_onshelf = no_onshelf@pre - 1
+
+		return()
+		begin
+			self.no_onshelf := self.no_onshelf + 1
+		end
+		post: no_onshelf = no_onshelf@pre + 1
+
+		reserve()
+		begin
+			self.no_onshelf := self.no_onshelf - 1
+		end
+		pre copiesOnShelf: no_copies > 0
+end
+class Copy
+	attributes
+	status : String init = 'onShelf'
+	operations
+		borrow( m : Member)
+		begin
+		self.status := 'onLoan';
+		self.book.borrow()
+		end
+
+		return( m : Member)
+		begin
+			self.status := 'onShelf';
+			self.book.return()
+		end
+
+		reserve( m : Member)
+		begin
+			self.status := 'reserved';
+			self.book.reserve()
+		end
+end
+
+class Reserve
+	attributes
+		no_reserved : Integer init = 0
+	status : String init = 'notReserved'
+		
+	operations
+	reserve(m : Member, c : Copy)
+		begin
+			insert (m, self) into Reservation;
+			self.no_reserved := self.no_reserved + 1;
+			if (self.no_reserved = 1) then
+				self.status := 'reserved';
+				m.reserve(c)
+			end
+		end
+
+		borrowReserved(m : Member, c : Copy)
+		begin
+			self.status := 'availableToReserve';
+			self.no_reserved := self.no_reserved - 1;
+			delete (m, self) from Reservation;
+			m.borrowReserved(c)
+		end
+
+		cancelReservation(m : Member, c : Copy)
+		begin
+			self.status := 'availableToReserve';
+			delete (m, self) from Reservation;
+			self.no_reserved := self.no_reserved - 1;
+			--We can call return and not an independant cancel fxn as it's contents are the exact same
+			m.cancelReservation(c)
+		end
+
+	--Statemachine which will show how the state fluctuates in the reservation classes
+	statemachines
+	psm States
+	states
+		newReservation : initial
+		availableToReserve [no_reserved = 0]
+		reserved [no_reserved > 0]
+	transitions
+		newReservation -> availableToReserve { create }
+		availableToReserve -> reserved { [no_reserved = 0] reserve() }
+		availableToReserve -> availableToReserve { cancelReservation() }
+		reserved -> availableToReserve { cancelReservation() }
+		availableToReserve -> availableToReserve { borrowReserved() }
+		reserved -> availableToReserve { borrowReserved() }
+	end
+end
+
+class Member
+	attributes
+		name : String
+		address : String
+		no_onloan : Integer init = 0
+		no_reserved : Integer init = 0
+		status : String
+		--Memebrship can expire
+		validMember : String init = 'valid'
+		fine : Integer init = 0
+	operations
+		borrow(c : Copy)
+		begin
+			insert (self, c) into HasBorrowed;
+			self.no_onloan := self.no_onloan + 1;
+			c.borrow(self)
+		end
+
+		return(c : Copy)
+		begin
+			delete (self, c) from HasBorrowed;
+			self.no_onloan := self.no_onloan - 1;
+			c.return(self)
+		end
+
+		reserve(c : Copy)
+		begin
+			insert (self, c) into IsReserved;
+			self.no_reserved := self.no_reserved + 1;
+			c.reserve(self)
+		end
+
+		borrowReserved(c : Copy)
+		begin
+			self.no_reserved := self.no_reserved - 1;
+			delete (self, c) from IsReserved;
+			insert (self, c) into HasBorrowed;
+			self.no_onloan := self.no_onloan + 1;
+			c.borrow(self)
+		end
+
+		cancelReservation(c : Copy)
+		begin
+			delete (self, c) from IsReserved;
+			self.no_reserved := self.no_reserved - 1;
+			--We can call return and not an independant cancel fxn as it's contents are the exact same
+			c.return(self)
+		end
+
+		overDue(c : Copy)
+end
+
+association HasBorrowed between
+	Member[0..1] role borrower
+	Copy[*] role borrowed
+end
+association CopyOf between
+	Copy[1..*] role copies
+	Book[1] role book
+end
+association IsReserved between
+	Member[0..1] role reserver
+	Copy[*] role reserved
+end
+
+association Reservation between
+	Member[0..1] role reserver
+	Reserve[*] role res
+end
+
+constraints
+context Member::borrow(c:Copy)
+	pre limit: self.no_onloan < 1
+	pre cond1: self.borrowed->excludes(c)
+	pre borrowIfAvailable: c.status = 'onShelf'
+	post cond2: self.borrowed->includes(c)
+
+context Member::return(c:Copy)
+	pre cond1: self.borrowed->includes(c)
+	post cond2: self.borrowed->excludes(c)
+
+context Member::overDue(c:Copy)
+	--Must be borrowed to be overdue
+	pre cond1: self.borrowed->includes(c)
+	--Can't already be overdue
+	post setFine: self.fine > 0
+
+context Member::reserve(c:Copy)
+--Make sure that no connection between memebr and copy
+pre cond1: self.reserved->excludes(c)
+pre NoReserveSameCopy: self.no_reserved < 1
+--Make sure member and copy are connected
+post cond2: self.reserved->includes(c)
+--Only can reserve if available
+pre borrowIfAvailable: c.status = 'onShelf'
+
+context Reserve::reserve(m:Member, c:Copy)
+	--Make sure no connection between reservation and member
+	pre cond1: self.reserver->excludes(m)
+	--Only can reserve if available
+	pre borrowIfAvailable: c.status = 'onShelf'
+	--Only can reserve if has no overdue fees
+	pre noOverDuebooks: m.status <> 'overDue'
+	--Can only reserve 1 book
+	pre limit: m.no_reserved < 1
+	--Make reservation and member are connected
+	post cond2: self.reserver->includes(m)
+
+context Reserve::borrowReserved(m:Member, c:Copy)
+	pre cond1: m.reserved->includes(c)
+	post con2: m.reserved->excludes(c)
+
+context Reserve::cancelReservation(m:Member, c:Copy)
+	pre cond1: m.reserved->includes(c)
+	post con2: m.reserved->excludes(c)
+
+
+
+context Member inv: self.validMember = 'valid'
+context Book inv: self.no_copies > -1
+context Reserve inv: self.no_reserved > -1
+--context Member inv: self.status <> 'overDue'
+

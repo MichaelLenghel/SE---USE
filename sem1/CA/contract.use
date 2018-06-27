@@ -1,0 +1,61 @@
+model CompanySys
+
+class contract
+	attributes
+		name : String
+		location : String
+	operations
+		hire(p : Employee)
+		begin 
+			insert (p, self) into WorksFor;
+			p.salary :=5000
+		end
+		fire(p : Employee)
+		begin 	
+			delete (p, self) from WorksFor;
+			p.salary :=0
+		end
+end
+
+class Employee < Person
+	attributes
+		salary : Real
+	operations
+		raiseSalary(rate :Real)
+		begin
+			self.salary := self.salary + rate;
+		end
+end
+
+class Person
+	attributes
+		name : String
+		age : Integer
+end
+
+class Manager < Person
+	operations
+		doHire(e:Employee)
+		doFire(e :Employee)
+end
+
+class Contract< Person
+	attributes
+		salary : Real
+		hours : Integer
+end
+
+association WorksFor between
+		Employee[*] role employees
+		Company [0..1] role employer
+end
+		
+association Manages between
+		Manager [*] role manager
+		Company [1]  role company
+end
+
+association HasContract between
+		Company[*] role companies
+		Contract[1] role contracted
+end 

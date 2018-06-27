@@ -1,0 +1,93 @@
+model Employee
+
+-- classes
+
+class Person
+	attributes
+		name : String
+		age : Integer
+		salary : Real
+	operations
+		raiseSalary (rate : Real) : Real
+end
+
+class Company
+	attributes
+		name : String
+		location : String
+	operations
+		hire (p : Person)
+		begin
+			insert(p, self) into WorksFor;
+		end
+		fire (p : Person)
+		begin
+			if p.salary < 100000 then
+				 	delete(p, self) from WorksFor;
+					p.salary := 0;
+			else
+				 	p.salary := p.salary;
+			end;
+		end
+end
+
+-- associations
+
+association WorksFor between
+	Person[*] role employee
+	Company[0..1] role employer
+end
+
+-- constraints
+
+constraints
+
+context Person::raiseSalary (rate : Real) : Real
+	--Part 1
+	pre assertAge: self.age >= 21
+	post raiseSalaryPost:
+		salary = salary@pre * (1.0 + rate)
+	post resultPost:
+		result = salary
+
+context Company::hire (p : Person)
+	pre hirePre1: p.isDefined()
+	pre hirePre2: employee->excludes(p)
+	post hirePost: employee->includes(p)
+	--Part 2
+	post startSal: p.salary >= 20000
+
+context Company::fire (p : Person)
+	pre firePre: employee->includes(p)
+	post fires:
+	if p.salary < 100000 then
+		p.salary = 0
+	else
+		p.salary = p.salary
+	endif
+	post firePost: employee->excludes(p)
+	--part 3
+	
+	--if (p.salary > 100000) 
+	--then
+	--	post resultFire: p.salary = 0
+	--endif
+	--else
+	--	post : p.salary = p.salary
+	--endif
+
+	--post :
+        --if p.salary > 100000 then
+		--	p.salary = 0
+		--endif
+		--else
+		--p.salary = 50
+		--endif
+	--post resultFire: 
+		--if p.salary < 100000 
+		--then
+		--	p.salary = 0
+		--else
+		--	employee@pre
+		--end if
+

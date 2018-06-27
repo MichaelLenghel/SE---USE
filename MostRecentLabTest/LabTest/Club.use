@@ -1,0 +1,84 @@
+model clubTeams
+
+class Club
+	attributes
+		budget : Integer
+	operations
+		addTeam(t : Team)    
+end
+
+class Team
+	attributes
+		name : String
+		salaries : Integer init = 0
+	operations
+		addPlayer(p : Player)
+end
+
+
+class Person  
+	attributes 
+		name : String
+		age : Integer
+end
+
+
+class Player < Person
+	attributes
+		pay : Integer init = 0
+		goals : Integer
+	operations
+		setPay(x : Integer)
+    
+end
+
+class Manager < Person
+	attributes
+	
+	operations
+		hire(p : Player, t: Team, salary : Integer)
+end
+
+association Owns between
+	Club[1]
+	Team[1..*] role teams
+end
+
+association PlaysOn between
+	Player[1..*] role players
+	Team[1..*] role teams
+end
+
+association Manages between 
+	Manager[1] role manager
+	Club[1] role club
+end
+    
+
+constraints
+
+context Club::addTeam(t : Team) 
+	-- Can't create a team without a club existing duuh
+	pre clubExists: self.isDefined()
+	
+	-- New team must not be a part of a club already (Uniqueness)
+	pre notOwned: teams->excludes(t)
+	
+	-- New team was created succuessfully
+	post nowOwned: teams->includes(t)
+
+context Team::addPlayer(p: Player)
+	-- Player should not be on the team already
+	pre unAssigned: players->excludes(p)
+	
+	-- Player has been assigned to a team
+	pre onTeam: players->includes(p)
+	
+context Manager::hire(p : Player, t : Team, salary : Integer)
+	-- Team should be owned by a club already
+	pre ownedTeam: teams->includes(t)
+	
+	-- Total of all salaries < club budget
+	--pre canAfford: 
+	
+

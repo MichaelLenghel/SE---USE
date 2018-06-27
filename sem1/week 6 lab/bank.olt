@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram_Layout version="13">
+  <diagramOptions>
+    <autolayout>false</autolayout>
+    <antialiasing>false</antialiasing>
+    <showassocnames>true</showassocnames>
+    <showattributes>true</showattributes>
+    <showmultiplicities>false</showmultiplicities>
+    <showoperations>false</showoperations>
+    <showrolenames>false</showrolenames>
+    <showgrid>false</showgrid>
+    <ShowStates>false</ShowStates>
+  </diagramOptions>
+  <node id="joe" sizeCalculated="true" type="Object">
+    <name>joe</name>
+    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+      <x>23.90368669357258</x>
+      <y>170.8298186139553</y>
+    </strategy>
+    <hidden>false</hidden>
+  </node>
+  <node id="sue" sizeCalculated="true" type="Object">
+    <name>sue</name>
+    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+      <x>295.7102278308215</x>
+      <y>162.86139395161484</y>
+    </strategy>
+    <hidden>false</hidden>
+  </node>
+  <node id="tom" sizeCalculated="true" type="Object">
+    <name>tom</name>
+    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+      <x>287.53062600339274</x>
+      <y>23.873151928196293</y>
+    </strategy>
+    <hidden>false</hidden>
+  </node>
+  <node id="ibm" sizeCalculated="true" type="Object">
+    <name>ibm</name>
+    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+      <x>16.185498948540555</x>
+      <y>13.13468612406723</y>
+    </strategy>
+    <hidden>false</hidden>
+  </node>
+</diagram_Layout>

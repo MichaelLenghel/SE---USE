@@ -1,0 +1,28 @@
+context Department
+	inv MoreStaffThanProjects:
+		employee->size() >= project->size()
+
+context Department
+	inv MoreStaffThanProjects2:
+		employee->size >= project->size
+
+context Department
+	inv MoreStaffThanProjects3:
+		self.employee->size() >= self.project->size()
+
+context d:Department
+	inv MoreStaffThanProjects4:
+		d.employee->size() >= d.project->size()
+
+inv MoreStaffThanProjects5:
+	Department.allInstances.forAll(d | d.employee.size() >= d.project->size())
+
+context Employee
+	inv MoreProjectsHigherSalary:
+		Employee.allInstances->forAll(e1, e2 | e1.project->size > e2.project->size implies e1.salary > e2.salary)
+
+context Project
+	inv BudgetWithinDepartmentBudget:
+		self.budget <= self.department.budget
+	inv EmployeesInControllingDepartment:
+		self.department.employee->includesAll(self.employee)

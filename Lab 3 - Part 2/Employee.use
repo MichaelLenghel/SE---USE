@@ -1,0 +1,64 @@
+model Employee
+
+-- classes
+
+class Person
+	attributes
+		name : String
+		age : Integer
+		income : Real
+	operations
+		calcIncome()
+end
+
+class Contract
+	attributes
+		title : String
+		salary : Real
+	operations
+		raiseSalary(rate : Real) : Real
+end
+
+class Company
+	attributes
+		name : String
+		location : String
+	operations
+		hire (p : Person, c : Contract)
+		fire (p : Person)
+		
+end
+
+-- associations
+
+association WorksOn between
+	Person[1] role person
+	Contract[*] role jobs
+end
+
+association IsAt between
+	Contract[1..*] role contracts
+	Company[1] role company
+end
+
+-- constraints
+
+constraints
+
+context Contract::raiseSalary (rate : Real) : Real
+	post raiseSalaryPost:
+		salary = salary@pre * (1.0 + rate)
+	post resultPost:
+		result = salary
+
+context Company::hire (p : Person, c : Contract)
+	--Ensures person exists
+	pre hirePre1: p.isDefined()
+	--Ensures person isn't in company b4 hiring
+	pre hirePre2: person->excludes(p)
+	--Ensures person is now in the company
+	post hirePost: person->includes(p)
+
+context Company::fire (p : Person)
+	pre firePre: person->includes(p)
+	post firePost: person->excludes(p)
